@@ -424,8 +424,15 @@ int main(int argc, char *argv[]) {
 	}
 
 	if (!(repeatOnceFunctionTimer = SDL_AddTimer(10000 /* 10 sec */, repeatOnceFunction, windowContext))) {
-		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Unable to create repeat once timer. See the log for more info.", windowContext);
-		SDL_LogCritical(SDL_LOG_CATEGORY_APPLICATION, "Unable to create repeat once timer, error: %s", SDL_GetError());
+		switch(langn){
+		case 1: SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Ошибка", "Невозможно повторить таймер. Больше информации в логе.", windowContext);
+			SDL_LogCritical(SDL_LOG_CATEGORY_APPLICATION, "Невозможно создать таймер, ошибка: %s", SDL_GetError()); break;
+		case 2: SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Ошибка", "Невозможно повторить таймер. Больше информации в логе.", windowContext);
+			SDL_LogCritical(SDL_LOG_CATEGORY_APPLICATION, "Невозможно создать таймер, ошибка: %s", SDL_GetError());
+		case 0: SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Unable to create repeat once timer. See the log for more info.", windowContext);
+			SDL_LogCritical(SDL_LOG_CATEGORY_APPLICATION, "Unable to create repeat once timer, error: %s", SDL_GetError());
+		}
+		
 	}
 
 
